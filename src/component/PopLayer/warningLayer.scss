@@ -1,0 +1,50 @@
+.warning-layer {
+  min-width: 380px;
+  box-sizing: border-box;
+  padding: 15px;
+  position: fixed;
+  z-index: 200;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+  border-radius: 4px;
+  animation: popLayer 3s forwards;
+}
+
+@keyframes popLayer {
+  0% {
+    top: 0;
+    opacity: 0.1;
+  }
+  15% {
+    top: 15px;
+    opacity: 1;
+  }
+  85% {
+    top: 15px;
+    opacity: 1;
+  }
+  100% {
+    top: -45px;
+    opacity: 0;
+  }
+}
+
+.success {
+  color: #67c23a;
+  border: 1px solid #e1f3d8;
+  background-color: #e1f3d8;
+}
+
+.error {
+  color: #f56c6c;
+  border: 1px solid #fde2e2;
+  background-color: #fef0f0;
+}
+
+.warning {
+  color: #e6a23c;
+  border: 1px solid #faecd8;
+  background-color: #fdf6ec;
+}
+

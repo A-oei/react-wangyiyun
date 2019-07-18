@@ -1,27 +1,31 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import NavigationBar from './component/NavigationBar';
 import HTTPTem from './page/AxiosTem';
+import Carousel from './component/Carousel';
+
+import PhoneLogin from './page/Login/PhoneLogin';
+
+import {Switch, Route, Redirect} from 'react-router-dom';
+
+
+/* <header className="App-header">
+                <HTTPTem/>
+            </header>*/
+
 
 
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <HTTPTem/>
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <NavigationBar/>
+            <Carousel/>
+            <Switch>
+                <Route path='/phoneLogin' component={PhoneLogin}/>
+            </Switch>
+            <HTTPTem></HTTPTem>
+
         </div>
     );
 }

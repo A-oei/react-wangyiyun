@@ -1,68 +1,110 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+####展示配置文件
 
-### `npm start`
+react脚手架会默认隐藏配置文件`config`，我们需要通过以下命令来将隐藏文件进行展示
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```javascript
+npm run eject
+```
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+这里会提示我们该命令是永久性的，不可逆，是否要继续，输入`y`即可，**注意：**使用该命令的时候需要将修改过的文件提前上传
 
-### `npm test`
+#### 修改默认启动端口号
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+在`package.json`中配置`start`命令
 
-### `npm run build`
+```json
+"scripts": {
+  "start": "set PORT=3333&&node scripts/start.js",
+  "build": "node scripts/build.js",
+  "test": "node scripts/test.js"
+},
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 使用手淘vw布局方案
 
-### `npm run eject`
+* 参考
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  [大漠手淘vm布局方案](https://www.w3cplus.com/mobile/vw-layout-in-vue.html)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. 下载必须文件
 
-## Learn More
+   ```no
+   npm install --save postcss-aspect-ratio-mini postcss-px-to-viewport postcss-write-svg postcss-cssnext postcss-viewport-units cssnano
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. 在`config>>webpack.config.js`中定义变量
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```javascript
+   //配置vw适配方案
+   const postcssAspectRatioMini = require('postcss-aspect-ratio-mini');
+   const postcssPxToViewport = require('postcss-px-to-viewport');
+   const postcssWriteSvg = require('postcss-write-svg');
+   const postcssCssnext = require('postcss-cssnext');
+   const postcssViewportUnits = require('postcss-viewport-units');
+   const cssnano = require('cssnano');
+   ```
 
-### Code Splitting
+3. 在`config>>webpack.config.js`中进行配置
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+   ```javascript
+   loader: require.resolve('postcss-loader'),
+   options: {
+       ident: 'postcss',
+       plugins: () => [
+           require('postcss-flexbugs-fixes'),
+           require('postcss-preset-env')({
+               autoprefixer: {
+                   flexbox: 'no-2009',
+               },
+               stage: 3,
+           }),
+           postcssNormalize(),
+           //配置vw适配方案 start
+           
+           postcssAspectRatioMini({}),// 用来处理元素容器宽高比
+           postcssPxToViewport({
+               viewportWidth: 750, // // 视窗的宽度，对应我们设计稿的宽度，一般是750
+               viewportHeight: 1334, // 视窗的高度，根据750设备的宽度来指定，一般指定1334，也可以不配置
+               unitPrecision: 3, // 指定'px'转换为视窗单位值得小数位数（很多时候无法整除）
+               viewportUnit: 'vw',  //指定需要转换成的视窗单位,建议使用vw
+               selectorBlackList: ['.ignore'], //指定不转换为视窗单位的类，可以自定义，可以无限添加,建议定义一至两个通用的类名
+               minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+               mediaQuery: false // 允许在媒体查询中转换`px
+           }),
+           postcssWriteSvg({ // 用来处理移动端1px的解决方案
+               utf8: false
+           }),
+           postcssCssnext({}),// 让项目使用CSS未来特性 并对其做兼容性处理
+           postcssViewportUnits({}), //给CSS的属性添加content的属性 配合viewport-units-buggyfill解决个别手机不支持vw
+           cssnano({ //压缩和清理CSS代码
+               "cssnano-preset-advanced": {
+                   zindex: false,
+                   autoprefixer: false
+               },
+           })
+           
+           //配置vw适配方案 end
+       ],
+       sourceMap: isEnvProduction && shouldUseSourceMap,
+   }
+   ```
 
-### Analyzing the Bundle Size
+在配置完成之后，重新执行`npm run statr`命令，使用时候直接使用px单位即可，插件会自动将px转换为vw，需要注意的是，**如果我们想要使用px**，那么可以在`selectorBlackList`中进行配置，在代码中写入配置的变量名会被自动忽略，不被进行转换，例如：
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```scss
+> li {
+  width: 50px;
+  box-sizing: border-box;
+  display: inline-block;
+  &.ignore {
+    padding: 3px;
+    }
+  }
+```
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

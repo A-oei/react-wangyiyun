@@ -1,0 +1,164 @@
+.top-navigation {
+  width: 100%;
+  background-color: #242424;
+  /*----------------------
+  顶部导航
+  ------------------------*/
+
+  .navigation-bar {
+    width: 1100px;
+    margin: 0 auto;
+    height: 70px;
+    border-bottom: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .bar-logo {
+      display: block;
+      text-indent: -9999px;
+      width: 157px;
+      height: 100%;
+      background: url(../../assets/images/topbar.png) 0 0 no-repeat;
+      padding-right: 20px;
+    }
+
+    .bar-lists {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      li {
+        a {
+          color: #cccccc;
+          font-size: 14px;
+          padding: 0 20px;
+        }
+      }
+    }
+
+    .bar-search {
+      > input {
+        width: 158px;
+        height: 32px;
+        border-radius: 32px;
+        box-sizing: border-box;
+        color: #9b9b9b;
+        cursor: text;
+        font-size: 12px;
+        padding-left: 35px;
+        border: none;
+      }
+    }
+
+    .bar-creator {
+      width: 90px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      border: 1px solid #4F4F4F;
+      color: #cccccc;
+      font-size: 12px;
+      border-radius: 20px;
+    }
+
+    .bar-login {
+      position: relative;
+      height: 100%;
+      .login-btn {
+        width: 50px;
+        height: 100%;
+        line-height: 70px;
+        color: #787878;
+        position: relative;
+        &::before {
+          content: '';
+          position: absolute;
+          right: -22px;
+          bottom: 25px;
+          width: 0;
+          height: 0;
+          border-width: 6px;
+          border-style: solid;
+          border-color: #787878 transparent transparent transparent;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        &:hover + .login-options {
+          display: block;
+        }
+
+      }
+      .login-options {
+        display: none;
+        position: absolute;
+        z-index: 2;
+        top: 54px;
+        right: -85px;
+        width: 158px;
+        background-color: #2b2b2b;
+        border: 1px solid #202020;
+        box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.50);
+        border-radius: 4px;
+        &:hover {
+          display: block;
+        }
+        > li {
+          padding-left: 42px;
+          border-bottom: 1px solid #232323;
+          > a {
+            color: #cccccc;
+            height: 38px;
+            line-height: 38px;
+            box-sizing: border-box;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            display: inline-block;
+            position: relative;
+            > i {
+              position: absolute;
+              top: 50%;
+              left: -30px;
+              transform: translateY(-50%);
+              width: 18px;
+              height: 18px;
+              background: url("../../assets/images/toplist.png") no-repeat;
+            }
+          }
+          &:nth-of-type(2) {
+            a {
+              i {
+                background-position: -20px -20px;
+              }
+            }
+          }
+          &:nth-of-type(3) {
+            a {
+              i {
+                background-position: -18px -39px;
+              }
+            }
+          }
+          &:nth-of-type(4) {
+            a {
+              i {
+                background-position: 0 -21px;
+              }
+            }
+          }
+          &:nth-of-type(5) {
+            border-bottom-width: 0;
+            a {
+              i {
+                background-position: 0 -39px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
