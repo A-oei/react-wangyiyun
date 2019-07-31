@@ -4,11 +4,12 @@
   padding: 15px;
   position: fixed;
   z-index: 200;
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
   line-height: 1;
   border-radius: 4px;
-  animation: popLayer 3s forwards;
+  transition: all 3s;
 }
 
 @keyframes popLayer {
@@ -31,12 +32,14 @@
 }
 
 .success {
+  top: 50px;
   color: #67c23a;
   border: 1px solid #e1f3d8;
   background-color: #e1f3d8;
 }
 
 .error {
+  top: 50px;
   color: #f56c6c;
   border: 1px solid #fde2e2;
   background-color: #fef0f0;

@@ -1,0 +1,42 @@
+.disc-tem {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  &:hover > .music-play {
+    display: block;
+  }
+  .tem-bg {
+    display: block;
+    width: 118px;
+    height: 100px;
+    background: url("../../assets/images/coverall.png") no-repeat 0 -570px;
+  }
+  > img {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .music-play {
+    position: absolute;
+    top: 78px;
+    right: 20px;
+    width: 22px;
+    height: 22px;
+    display: none;
+    background: url("../../assets/images/iconall.png") no-repeat 0 -85px;
+    &:hover {
+      background-position: 0 -111px;
+    }
+  }
+  .disc-title, .singer {
+    width: 90%;
+    line-height: 18px;
+    display: block;
+    text-align: left;
+  }
+  .singer {
+    color: #333333;
+  }
+}

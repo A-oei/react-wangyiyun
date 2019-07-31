@@ -14,4 +14,11 @@ function WarningLayer(params) {
     }
 }
 
+WarningLayer.prototype = {
+    close() {
+        alert(1112)
+    }
+}
+
+
 export default WarningLayer;

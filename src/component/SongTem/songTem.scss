@@ -1,0 +1,56 @@
+.song-tem {
+  width: 140px;
+  height: 240px;
+  position: relative;
+  cursor: pointer;
+  .tem-bg {
+    width: 140px;
+    height: 140px;
+    display: block;
+  }
+  .tem-img {
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  .tem-bottom {
+    width: 100%;
+    height: 27px;
+    color: #cccccc;
+    background: url("../../assets/images/coverall.png") no-repeat 0 -537px;
+    position: absolute;
+    left: 0;
+    bottom: 100px;
+    > span {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: url("../../assets/images/iconall.png") no-repeat;
+      &:nth-of-type(1) {
+        width: 14px;
+        height: 11px;
+        left: 5px;
+        background-position: 0 -24px;
+      }
+      &.play-volume {
+        color: #cccccc;
+      }
+      &.play-btn {
+        right: 5px;
+        width: 16px;
+        height: 17px;
+        background-position: 0 0;
+      }
+    }
+  }
+  .tem-name {
+    display: block;
+    text-align: left;
+    margin: 8px 0 3px;
+    font-size: 14px;
+    color: #000;
+  }
+}

@@ -60,6 +60,18 @@ body {
   clear: both;
 }
 
+//单行 超出部分显示为省略号
+.line-omit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+//穿透
+.penetrate {
+  pointer-events: none;
+}
+
 ol, ul {
   list-style: none;
 }

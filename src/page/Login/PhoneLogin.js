@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import http from '../../core/require';
 import './PhoneLogin.scss';
 
-import WarningLayer from '@/component/PopLayer/warningLayer.js';
 
 
 const otherList = [
@@ -18,7 +17,7 @@ const otherList = [
     {
         title: '网易邮箱账号登录'
     },
-]
+];
 
 class PhoneLogin extends Component {
 
@@ -30,6 +29,7 @@ class PhoneLogin extends Component {
             phone: '',//手机号
             password: '',//密码,
             inputval: "www",
+            warning: {}
         }
     }
 
@@ -54,10 +54,22 @@ class PhoneLogin extends Component {
             password: this.state.password
         })
             .then(res => {
-                {WarningLayer({status: true, type: 'success', content: '登录成功 (￣▽￣)／'})}
+                this.setState({
+                    warning: {
+                        status: true,
+                        type: 'success',
+                        content: '登录成功'
+                    }
+                })
             })
             .catch(err => {
-                {WarningLayer({status: true, type: 'error', content: '登录失败 (￣▽￣)／'})}
+                this.setState({
+                    warning: {
+                        status: true,
+                        type: 'error',
+                        content: '登录失败'
+                    }
+                })
             })
     }
 
