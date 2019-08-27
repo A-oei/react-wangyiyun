@@ -66,6 +66,9 @@ class Home extends Component {
 
     //
     componentDidMount() {
+
+        console.log(this.location, 'this.context');
+
         services.get_h_recommend()
             .then(res => {
                 let rdata = res.result.slice(0, 8);

@@ -7,7 +7,7 @@ import HTTPTem from './page/AxiosTem';
 
 import PhoneLogin from './page/Login/PhoneLogin';
 import Home from './page/Hone/index';
-
+import SongListDetail from './page/SoneListDetail/index';
 
 import {Switch, Route, Redirect} from 'react-router-dom';
 
@@ -21,6 +21,7 @@ function App() {
             <Switch>
                 <Route path='/home' component={Home}/>
                 <Route path='/phoneLogin' component={PhoneLogin}/>
+                <Route path='/songListsDetail' component={SongListDetail}/>
                 <Redirect to='/home'/>
             </Switch>
             {WarningLayer}
